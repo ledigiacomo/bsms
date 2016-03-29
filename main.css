@@ -1,0 +1,185 @@
+
+
+h1{
+  text-align:left;
+  color:#000;
+}
+
+body{
+  background-image: url("//www.unc.edu/files/2015/04/spring_old_well_2015_1600.jpg");
+}
+
+div.progress{
+  border: 1px solid #C0C0C0;
+}
+
+select{
+  max-width: 50%;
+}
+
+table{
+  color:#367DA2;
+}
+
+ul.nav{
+  margin-top:5px;
+}
+
+.blue{
+  color:#56A0D3;
+}
+
+.box{
+  max-width:75%;
+  margin-left:5%;
+}
+
+.btn{
+  box-shadow:2px 2px 2px #C0C0C0;
+  border: none;
+}
+
+.input-sm, #inputTerm, #inputAdv1, #inputAdv2{
+border:1px solid #C0C0C0;
+}
+
+label.col-lg-2.control-label{
+  color:#367DA2;
+  font-weight: bold;
+}
+
+div.hint{
+  font-size:10px;
+  font-family:Sans-Serif;
+  color:red;
+  text-align:left;
+}
+
+.logo{
+  max-height: 50px;
+}
+
+.nav > li{
+  background-color:#fff;
+  opacity:0.8;
+}
+
+.nav > li > a:hover{
+  background-color:#56A0D3;
+  color: #FFF;
+  opacity:0.8;
+}
+
+.nav > li > a{
+  color:#56A0D3;
+}
+
+.table a, table a{
+  color:#56A0D3 !important;
+}
+
+.faqAnswer{
+  font-size:15px;
+  font-family:Sans-Serif;
+  color:#000;
+  margin-left:10px;
+  margin-bottom:25px;
+}
+
+.faqQuestion{
+  font-size:30px;
+  font-weight:bold;
+  font-family:Sans-Serif;
+  color:#56A0D3;
+  line-height:1;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgb(173,216,230);
+}
+
+.vertical-align{
+  position: relative;
+  top: 50%;
+  transform: translateY(+500%);
+}
+
+.well{
+  border-radius:3px;
+}
+
+.wider{
+  text-align:center;
+  overflow:scroll;
+}
+
+#authenticateBtn{
+  margin-top:20%;
+}
+
+#btn-group{
+  margin-bottom:10px;
+}
+
+#comments-label, #comments-label>*{
+  padding-top:10px;
+  vertical-align:middle;
+  text-align:right;
+  padding-right:5px;
+}
+
+#email-form{
+  margin-left:35%;
+}
+
+#email-table *{
+  text-align:left;
+
+}
+
+#email-table.table{
+  width:5%;
+}
+
+#errorBubble{
+  width:34%;
+  height: 70px;
+  border-radius: 3px;
+  background-color:#FFF5EE;
+  color: #000;
+  float:center;
+  padding:10px;
+  text-align:center;
+  margin-left:33%;
+}
+
+#feedback-table td{
+  padding-left:10px;
+}
+
+#individual-student{
+  margin-left:5%;
+  margin-right:5%;
+}
+
+#infopanel{
+  width:200px;
+  height:100px;
+  color: #000;
+}
+
+#post-btn{
+  vertical-align:bottom;
+  margin-bottom:10px;
+}
+
+#submitBtn{
+  margin-left:150px;
+  background-color:#56A0D3;
+}
+
+#table-student th{
+  text-align:center;
+  vertical-align:top;
+}
+
