@@ -3,7 +3,8 @@ bsms.cs.unc.edu
 
 1. generate the faculty list dynamically  -from a file not hard coded  		
 
-2. if it is approved close it Diane
+2. if it is approved close it Diane 
+[Check the code, find that close means decision has been made for this application]
 
 3. dont clear application on submission error it goes to a page called form.php 
 when submit is clicked to-do
