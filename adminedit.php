@@ -27,7 +27,8 @@ if(isset($_POST["submit"]))
         if($row["Status"]) //Set to closed and mail to sender the result
         {
             mysql_query("update Applications set Status = 0 where Applications.ID = '" . addslashes(strip_tags($_SESSION["ticketedit"])) . "'");
-            mail($row["Email"], "Your Application: \"" . $row["ID"] . "\"", "Your application has been resolved, thank you for your patience!");
+			mail($row["Email"], "Your Application", "Your application has been resolved, thank you for your patience!");
+			// mail($row["Email"], "Your Application: \"" . $row["ID"] . "\"", "Your application has been resolved, thank you for your patience!");
         }
         else //Set to open
             mysql_query("update Applications set Status = 1 where Applications.ID = '" . addslashes(strip_tags($_SESSION["ticketedit"])) . "'");
