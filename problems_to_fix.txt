@@ -14,4 +14,4 @@ bsms.cs.unc.edu
 
 6. constrain uploadable files to PDF's only
 
-7. Subject line of auto emails are the application number, this obviously doesnt mean anything to the student, either getrid of it or make it something more relevant do it today -- solved by removing the application number
+7. Subject line of auto emails are the application number, this obviously doesnt mean anything to the student, either getrid of it or make it something more relevant do it today -- solved by removing the application number. [Need testing]
