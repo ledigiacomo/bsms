@@ -4,7 +4,7 @@ if(!isset($_SESSION['onyen'])) {
     header("Location: login.php");
 }
 if(isset($_POST["submit"]))
-{	
+{
 	//Check to be sure there are no blank fields, and show error if we do
 	if (empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["pid"]) || empty($_POST["gpa"]) || empty($_POST["advisor1"]) || empty($_POST["advisor2"]) || empty($_POST["term"]))
 	{
@@ -25,25 +25,34 @@ if(isset($_POST["submit"]))
 	} else if(empty($_FILES['file1']['name'])) {
 		showForm("Please upload your resume to the application.");
 		die();
+  } else if($_FILES['file1']['type'] != "application/pdf") {
+    showForm("Please upload the PDF version.");
+		die();
 	} else if(empty($_FILES['file2']['name'])) {
 		showForm("Please upload your Statement of Purpose to the application.");
+		die();
+  } else if($_FILES['file2']['type'] != "application/pdf") {
+    showForm("Please upload the PDF version.");
 		die();
 	} else if(empty($_FILES['file3']['name'])) {
 		showForm("Please upload your Transcript to the application.");
 		die();
+  } else if($_FILES['file3']['type'] != "application/pdf") {
+    showForm("Please upload the PDF version.");
+		die();
 	} else {
 
 	include 'opendb.php';
-		
+
 		//Insert the application in the db
-		mysql_query("insert into Applications values(NULL, NOW(), '" . 
+		mysql_query("insert into Applications values(NULL, NOW(), '" .
 			addslashes(strip_tags($_POST["firstname"])) .
-			"', '" . addslashes(strip_tags($_POST["lastname"])) . 
-			"', '" . addslashes(strip_tags($_SESSION["onyen"])) . 
-			"', '" . addslashes(strip_tags($_POST["email"])) . 
-			"', '" . addslashes(strip_tags($_POST["pid"])) . 
+			"', '" . addslashes(strip_tags($_POST["lastname"])) .
+			"', '" . addslashes(strip_tags($_SESSION["onyen"])) .
+			"', '" . addslashes(strip_tags($_POST["email"])) .
+			"', '" . addslashes(strip_tags($_POST["pid"])) .
 			"', '" . addslashes(strip_tags($_POST["gpa"])) .
-			"', '" . addslashes(strip_tags($_POST["advisor1"])) . 
+			"', '" . addslashes(strip_tags($_POST["advisor1"])) .
 			"', '" . addslashes(strip_tags($_POST["advisor2"])) .
 			"', '" . addslashes(strip_tags($_POST["term"])) . "', '', '', 1, 0)")
 			or die("Error: Could not insert into table " . mysql_error());
@@ -53,14 +62,14 @@ if(isset($_POST["submit"]))
 
 		$result2 = mysql_query("select Username, Email, Access from Admins where Admins.Username = '" . $_POST["advisor2"] . "'");
 		$row2 = mysql_fetch_array($result2);
-			
+
 		//Mail the submitter
 		mail($_POST["email"], "Successful", "Hi, ".$_POST['firstname']."! Thank you for applying to the BSMS Program at UNC Chapel Hill. You will be contacted when a decision is made. \n\n Until then please feel free to log back in to periodically check the status of your application. Best of luck! \n\nThis is an automated message, please do not respond.");
 		//Mail the Advisor 1
 	mail($row1["Email"], "Successful", "" .$_POST['firstname']. " has applied to the BSMS program and listed you as an advisor. \n\nThis is an automated message, please do not respond.");
 		//Mail the Advisor 2
 		mail($row2["Email"], "Successful", "".$_POST['firstname']. " has applied to the BSMS program and listed you as an advisor. \n\nThis is an automated message, please do not respond.");
-		
+
 		//Mail to all admins
 		$results = mysql_query("select * from Admins where Admins.Access = '1'");
 		while($row = mysql_fetch_array($results))
@@ -91,7 +100,7 @@ if(isset($_POST["submit"]))
 
 		mysql_query("INSERT INTO Uploads(UploadID, FileName1, FileName2, FileName3, File1, File2, File3) VALUES ((SELECT MAX(ID) FROM Applications), '$fileName1', '$fileName2', '$fileName3', '$file1', '$file2', '$file3')")
 			or die("Error: Couldn't select db " . mysql_error());
-			
+
 		//Show success on completion
 		echo '
 		<!DOCTYPE html>
@@ -99,7 +108,7 @@ if(isset($_POST["submit"]))
 		<head>
 			<title>Computer Science BS/MS Application</title>
 			<link rel="stylesheet" type="text/css" href="Resources/bootstrap/css/theme.min.css">
-			<link rel="stylesheet" type="text/css" href="Resources/main.css"> 
+			<link rel="stylesheet" type="text/css" href="Resources/main.css">
 			<script src="Resources/jquery-1.11.2.min.js"></script>
 			<script src="Resources/bootstrap/js/boostrap.min.js"></script>
 		</head>
@@ -120,8 +129,8 @@ if(isset($_POST["submit"]))
 		</div>
 		</div>
 		</body>
-		</html>';	
-		mysql_close($connection);	
+		</html>';
+		mysql_close($connection);
 		die();
 	}
 }
@@ -138,7 +147,7 @@ function showForm($error)
 	<head>
 		<title>Computer Science BS/MS Application</title>
 		<link rel="stylesheet" type="text/css" href="Resources/bootstrap/css/theme.min.css">
-		<link rel="stylesheet" type="text/css" href="Resources/main.css"> 
+		<link rel="stylesheet" type="text/css" href="Resources/main.css">
 		<script src="Resources/jquery-1.11.2.min.js"></script>
 		<script src="Resources/bootstrap/js/bootstrap.min.js"></script>
 	</head>
@@ -168,34 +177,34 @@ function showForm($error)
 			   <label for="inputFname" class="col-lg-2 control-label">First Name</label>
 			   <div class="col-lg-8">
 				<input type="text" class="form-control input-sm" id="inputFname" name="firstname" placeholder="First Name">
-			   </div>			
+			   </div>
 			</div>
 			<div class="form-group">
 			   <label for="inputLname" class="col-lg-2 control-label">Last Name</label>
 			   <div class="col-lg-8">
 				<input type="text" class="form-control input-sm" id="inputLname" name="lastname" placeholder="Last Name">
-			   </div>			
+			   </div>
 			</div>
 			<div class="form-group">
 			   <label for="inputEmail" class="col-lg-2 control-label">Email</label>
 			   <div class="col-lg-8">
 				<input type="text" class="form-control input-sm" id="inputEmail" name="email" placeholder="Email">
 				<div class='hint'>must be of form 'example@example.com'</div>
-			   </div>			
+			   </div>
 			</div>
 			<div class="form-group">
 			   <label for="inputPid" class="col-lg-2 control-label">PID</label>
 			   <div class="col-lg-8">
 				<input type="text" class="form-control input-sm" id="inputPid" name="pid" placeholder="PID">
 				<div class='hint'>must be 9 digits long</div>
-			   </div>			
+			   </div>
 			</div>
 			<div class="form-group">
 			   <label for="inputGpa" class="col-lg-2 control-label">GPA</label>
 			   <div class="col-lg-8">
 				<input type="text" class="form-control input-sm" id="inputGpa" name="gpa" placeholder="GPA">
 				<div class='hint'>must be of form '#.##'</div>
-			   </div>			
+			   </div>
 			</div><!--form-group-->
 			<div class="form-group">
 				<label for="inputTerm" class="col-lg-2 control-label">Anticipated Start Date</label>
@@ -275,20 +284,20 @@ function showForm($error)
 			   <label for="inputResume" class="col-lg-2 control-label">Resume</label>
 			   <div class="col-lg-8">
 				<input type="file" name="file1" id="file1">
-			   </div>	
+			   </div>
 			</div><!--form-group-->
 			<div class="form-group">
 			   <label for="inputSOP" class="col-lg-2 control-label">Statement of Purpose</label>
 			   <div class="col-lg-8">
 				<input type="file" name="file2" id="file2">
 			   </div>
-			</div><!--form-group-->	
+			</div><!--form-group-->
 			<div class="form-group">
 			   <label for="inputSOP" class="col-lg-2 control-label">Transcript</label>
 			   <div class="col-lg-8">
 				<input type="file" name="file3" id="file3">
 			   </div>
-			</div><!--form-group-->	
+			</div><!--form-group-->
 				<?php
 				include 'opendb.php';
 				$result = mysql_query("select Username from Admins where Admins.Username = '" . $_SESSION["onyen"] . "'");
@@ -309,7 +318,7 @@ window.location.href="index.php";
 					echo '<input <a class="btn btn-primary" name="submit" type="submit" value="Submit Application" id="submitBtn"></a>';
 				    }
 				?>
-			</form>	
+			</form>
 	    		</div><!--box-->
 			</div><!--well-->
 		   </div><!--col-lg-12-->
