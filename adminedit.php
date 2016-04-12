@@ -9,20 +9,20 @@ if(!isset($_SESSION["ticketedit"])) //This means no ticket was selected, go back
 {
     header("Location: admin.php");
 }
- 
+
 include 'opendb.php';
- 
+
 // Fetch the ticket we are suppose to be looking at
 $result = mysql_query("select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Term, Applications.A1Feedback, Applications.A2Feedback, Applications.Status, Applications.Approval from Applications where Applications.ID = '" . $_SESSION["ticketedit"] . "'");
 $row = mysql_fetch_array($result);
- 
+
 $result1 = mysql_query("select Username, Access from Admins where Admins.Username = '" . $_SESSION["onyen"] . "'");
 $row1 = mysql_fetch_array($result1);
- 
+
 // If we received a form, handle it!
 if(isset($_POST["submit"]))
 {
-    if(!strcmp($_POST["submit"], "Toggle Status")) //Toggle the status
+    if(!strcmp($_POST["submit"], "Decide/Withdraw")) //Toggle the status
     {
         if($row["Status"]) //Set to closed and mail to sender the result
         {
@@ -76,23 +76,23 @@ if(isset($_POST["send"])) //If we are on the email form we will receive this ins
     if(!mail($_POST["to"], $_POST["subject"], $_POST["message"], "From: " . $_POST["from"]))
         show_html("show_email", "Error: failed to send email");
 }
- 
+
 show_html("show_ticket", ""); //Show the default form
- 
+
 function show_ticket($error) //The default form, shows the one ticket and all the buttons for options
-{   
+{
     //Get the ticket to display
     $result = mysql_query("select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Term, Uploads.UploadID, Uploads.File1, Uploads.File2, Uploads.File3, Applications.A1Feedback, Applications.A2Feedback, Applications.Status, Applications.Approval from Applications LEFT JOIN Uploads on Uploads.UploadID = Applications.ID where Applications.ID = '" . $_SESSION["ticketedit"] . "'");
     $row = mysql_fetch_array($result);
- 
-     
+
+
     $result1 = mysql_query("select Username, Access from Admins where Admins.Username = '" . $_SESSION["onyen"] . "'");
     $row1 = mysql_fetch_array($result1);
-     
+
     //Show error if there is one
     if(isset($error) && strcmp($error, ""))
         echo $error . "<br />";
-         
+
     //Build form
 
     echo "<form action='adminedit.php' method='POST'>
@@ -120,7 +120,7 @@ function show_ticket($error) //The default form, shows the one ticket and all th
 	      		</thead>
 		<tbody>";
 
-     
+
 		echo "<tr>
 			<td>".stripslashes($row["ID"])."</td>
 			<td>".stripslashes($row["Received"])."</td>
@@ -132,7 +132,7 @@ function show_ticket($error) //The default form, shows the one ticket and all th
 			<td>".stripslashes($row["Advisor1"])."</td>
 			<td>".stripslashes($row["Advisor2"])."</td>
 			<td>".stripslashes($row["Term"])."</td>";
-    
+
     $id = stripslashes($row["UploadID"]);
     if(!empty($row["File1"])){
         echo "<td>"."<a href='download.php?file=1&id=$id'>Download</a></td>";
@@ -154,12 +154,12 @@ function show_ticket($error) //The default form, shows the one ticket and all th
     if(stripslashes($row["Status"]) == 1)
         echo "<td>Open</td>";
     else if(stripslashes($row["Status"]) == 0)
-        echo "<td>Closed</td>";
+        echo "<td>Decided</td>";
     if(stripslashes($row["Approval"]) == 1)
         echo "<td>Yes</td></tr></tbody></table>";
     else if(stripslashes($row["Approval"]) == 0)
         echo "<td>No</td></tr></tbody></table>";
-    
+
     echo "
 		<table class='table' id='feedback-table'>
 		<tbody>
@@ -168,7 +168,7 @@ function show_ticket($error) //The default form, shows the one ticket and all th
     ";
     if($row1["Username"] == $_SESSION["onyen"] && $row1["Access"] == '1'){
     echo "
-		<input type='submit' name='submit' value='Toggle Status' class='btn btn-primary' />";
+		<input type='submit' name='submit' value='Decide/Withdraw' class='btn btn-primary' />";
         echo	"<input type='submit' name='submit' value='Approve/Disapprove' class='btn btn-primary' />";
     }
     if(!strcmp(stripslashes($row["Advisor1"]), $_SESSION["user"]) || !strcmp(stripslashes($row["Advisor2"]), $_SESSION["user"]))
@@ -219,7 +219,7 @@ function show_email($error) //This will show the email form
     //Show error if there is one
     if(isset($error) && strcmp($error, ""))
         echo $error . "<br />";
-         
+
     //Show the form with auto filled from and to boxes.
     echo "<form method='POST' action='adminedit.php' id='email-form'><table class='table' id='email-table'>";
     $result = mysql_query("select Applications.Email from Applications where Applications.ID = '" . $_SESSION["ticketedit"] . "'");
@@ -241,7 +241,7 @@ function show_html($object, $error) //The basic html for all this.
 	<head>
 		<title>Computer Science BS/MS Application</title>
 		<link rel="stylesheet" type="text/css" href="Resources/bootstrap/css/theme.min.css">
-		<link rel="stylesheet" type="text/css" href="Resources/main.css"> 
+		<link rel="stylesheet" type="text/css" href="Resources/main.css">
 		<script src="Resources/jquery-1.11.2.min.js"></script>
 		<script src="Resources/bootstrap/js/bootstrap.min.js"></script>
         	<script src="script.js"></script>
@@ -259,7 +259,7 @@ function show_html($object, $error) //The basic html for all this.
 		<h1>Welcome to the <span class="blue"></br>Computer </br>Science</span> </br>BS/MS Application</h1>
 		<br />
 		<div class="well wider">
-			<?php call_user_func($object, "") //Calls the proper object to be shown ?> 
+			<?php call_user_func($object, "") //Calls the proper object to be shown ?>
 		</div><!--well-->
 	</div><!--container-->
 	</body>

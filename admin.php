@@ -21,7 +21,7 @@ if(isset($_SESSION["admin"])){
 function show_Applications($all, $my, $unassigned, $sort) //This function takes 3 bools, all, my, and unassigned and then sorts it
 {
 	include 'opendb.php';
-		
+
 	//If we received a form process it
 	if(isset($_POST["submit"]))
 	{
@@ -39,10 +39,10 @@ function show_Applications($all, $my, $unassigned, $sort) //This function takes 
 	{
 		$_SESSION["all"] = false;
 		$_SESSION["my"] = false;
-		$_SESSION["unassigned"] = false; 
+		$_SESSION["unassigned"] = false;
 		$_SESSION["sort"] = "";
 	}
-	
+
 	//This block is the corresponding SQL statement to the pattern of bits set
 	if(!$_SESSION["all"] && !$_SESSION["my"] && !$_SESSION["unassigned"]) // Default Home View Done
         $query = "select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Status from Applications where Applications.Status = 1";
@@ -60,7 +60,7 @@ function show_Applications($all, $my, $unassigned, $sort) //This function takes 
         $query = "select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Status from Applications LEFT JOIN Admins on Admins.Username IN (Applications.Advisor1, Applications.Advisor2) where Admins.Username = '" . $_SESSION["user"] . "'";
     else if($_SESSION["all"] && $_SESSION["my"] && $_SESSION["unassigned"]) // Will return no results
         $query = "select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Status from Applications LEFT JOIN Admins on Admins.Username IN (Applications.Advisor1, Applications.Advisor2) where Admins.Username is NULL and Admins.Username = '" . $_SESSION["user"] . "'";
-	
+
 	//This block tacks on the sort to the end of the SQL statement
 	if(!strcmp($_SESSION["sort"], "date"))
 		$query = $query . " order by Applications.Received";
@@ -70,11 +70,11 @@ function show_Applications($all, $my, $unassigned, $sort) //This function takes 
 		$query = $query . " order by Applications.Onyen";
 	else if(!strcmp($_SESSION["sort"], "email"))
 		$query = $query . " order by Applications.Email";
-	
+
 	//Execute query on db
 	$results = mysql_query($query);
 	$num_rows = mysql_num_rows($results);
-	
+
 	//Show results!
 	echo "<form action='admin.php' method='POST'>
 	      <table class='table table-hover'>";
@@ -110,7 +110,7 @@ function show_Applications($all, $my, $unassigned, $sort) //This function takes 
 		if(stripslashes($row["Status"]) == 1)
 			echo "<td>Open</td>";
 		else
-			echo "<td>Closed</td>";	
+			echo "<td>Closed</td>";
 		echo "<td><input type='radio' name='choice' value='".stripslashes($row["ID"])."' /></td></tr>";
 
 	}
@@ -123,7 +123,7 @@ function show_Applications($all, $my, $unassigned, $sort) //This function takes 
 	      </tr>
 	</tbody>
 	</table>";
-	
+
 	//This is the table for the buttons, the ifs are for the toggling of the button names
 	if($_SESSION["all"]) { $allsubmit = "View Open Applications"; } else { $allsubmit = "View All Applications"; }
 	echo "<br /><input class='btn btn-primary' type='submit' name='submit' value='" . $allsubmit . "' />";
@@ -133,14 +133,14 @@ function show_Applications($all, $my, $unassigned, $sort) //This function takes 
 	echo "<input class='btn btn-primary' type='submit' name='submit' value='" . $mysubmit . "' />";
 	if($_SESSION["unassigned"]) { $unassignedsubmit = "View Assigned Applications"; } else { $unassignedsubmit = "View Unassigned Applications"; }
 	echo "<input class='btn btn-primary' type='submit' name='submit' value='" . $unassignedsubmit . "' />
-	
+
 	</form>";
 }
 } else {
 function showAdvisor_Applications($all, $my, $sort) //This function takes 1 bool, 'my' and then sorts it
 {
 	include 'opendb.php';
-		
+
 	//If we received a form process it
 	if(isset($_POST["submit"]))
 	{
@@ -157,13 +157,13 @@ function showAdvisor_Applications($all, $my, $sort) //This function takes 1 bool
 		$_SESSION["my"] = true;
 		$_SESSION["sort"] = "";
 	}
-	
+
 	//This block is the corresponding SQL statement to the pattern of bits set
 	if(!$_SESSION["all"] && $_SESSION["my"]) // All Applications Done
         $query = "select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Status from Applications LEFT JOIN Admins on Admins.Username IN (Applications.Advisor1, Applications.Advisor2) where Admins.Username = '" . $_SESSION["user"] . "' AND Applications.Status = 1";
 	else if($_SESSION["all"] && $_SESSION["my"]) // All Closed Applications
         $query = "select Applications.ID, Applications.Received, Applications.Firstname, Applications.Lastname, Applications.Onyen, Applications.Email, Applications.PID, Applications.GPA, Applications.Advisor1, Applications.Advisor2, Applications.Status from Applications LEFT JOIN Admins on Admins.Username IN (Applications.Advisor1, Applications.Advisor2) where Admins.Username = '" . $_SESSION["user"] . "'";
-	
+
 	//This block tacks on the sort to the end of the SQL statement
 	if(!strcmp($_SESSION["sort"], "date"))
 		$query = $query . " order by Applications.Received";
@@ -173,11 +173,11 @@ function showAdvisor_Applications($all, $my, $sort) //This function takes 1 bool
 		$query = $query . " order by Applications.Onyen";
 	else if(!strcmp($_SESSION["sort"], "email"))
 		$query = $query . " order by Applications.Email";
-	
+
 	//Execute query on db
 	$results = mysql_query($query);
 	$num_rows = mysql_num_rows($results);
-	
+
 	//Show results!
 	echo "<form action='admin.php' method='POST'>
 		<table class='table table-hover'>
@@ -214,7 +214,7 @@ function showAdvisor_Applications($all, $my, $sort) //This function takes 1 bool
 		if(stripslashes($row["Status"]) == 1)
 			echo "<td>Open</td>";
 		else
-			echo "<td>Closed</td>";	
+			echo "<td>Decided</td>";
 		echo "<td><input type='radio' name='choice' value='".stripslashes($row["ID"])."' /></td></tr>";
 	}
 	echo "<tr>
@@ -242,7 +242,7 @@ function showAdvisor_Applications($all, $my, $sort) //This function takes 1 bool
 	<head>
 		<title>Computer Science BS/MS Application</title>
 		<link rel="stylesheet" type="text/css" href="Resources/bootstrap/css/theme.min.css">
-		<link rel="stylesheet" type="text/css" href="Resources/main.css"> 
+		<link rel="stylesheet" type="text/css" href="Resources/main.css">
 		<script src="Resources/jquery-1.11.2.min.js"></script>
 		<script src="Resources/bootstrap/js/bootstrap.min.js"></script>
 	</head>
