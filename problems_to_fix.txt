@@ -5,20 +5,22 @@ bsms.cs.unc.edu
 
 2. if it is approved close it Diane 
 [Check the code, find that close means decision has been made for this application]
-—- solved [Need testing]
+-- solved [testing]
 
 3. dont clear application on submission error it goes to a page called form.php 
 when submit is clicked to-do
+-- solved [testing]
 
 4. cancel buttons on pages  Luke finished it
+-- solved [testing]
 
 5. Date go from current date to the next 6 semesters (JavaScript on page load)
 -either do current date + time or have them input a number and check the number 
 
 6. constrain uploadable files to PDF's only
-—- solved by checking file type (extension) [Need testing]
+-- solved by checking file type (extension) [testing]
 
 7. Subject line of auto emails are the application number, 
 this obviously doesnt mean anything to the student, 
 either getrid of it or make it something more relevant do it today 
--- solved by removing the application number. [Need testing]
+-- solved by removing the application number. [testing]
