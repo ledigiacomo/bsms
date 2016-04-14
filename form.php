@@ -176,33 +176,33 @@ function showForm($error)
 			<div class="form-group">
 			   <label for="inputFname" class="col-lg-2 control-label">First Name</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputFname" name="firstname" placeholder="First Name">
-			   </div>
+				<input type="text" class="form-control input-sm" id="inputFname" name="firstname" placeholder="First Name" value="<?php echo $_POST["firstname"];?>"/>
+			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputLname" class="col-lg-2 control-label">Last Name</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputLname" name="lastname" placeholder="Last Name">
-			   </div>
+				<input type="text" class="form-control input-sm" id="inputLname" name="lastname" placeholder="Last Name" value="<?php echo $_POST["lastname"];?>"/>
+			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputEmail" class="col-lg-2 control-label">Email</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputEmail" name="email" placeholder="Email">
+				<input type="text" class="form-control input-sm" id="inputEmail" name="email" placeholder="Email" value="<?php echo $_POST["email"];?>"/>
 				<div class='hint'>must be of form 'example@example.com'</div>
-			   </div>
+			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputPid" class="col-lg-2 control-label">PID</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputPid" name="pid" placeholder="PID">
+				<input type="text" class="form-control input-sm" id="inputPid" name="pid" placeholder="PID" value="<?php echo $_POST["pid"];?>"/>
 				<div class='hint'>must be 9 digits long</div>
-			   </div>
+			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputGpa" class="col-lg-2 control-label">GPA</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputGpa" name="gpa" placeholder="GPA">
+				<input type="text" class="form-control input-sm" id="inputGpa" name="gpa" placeholder="GPA" value="<?php echo $_POST["gpa"];?>"/>
 				<div class='hint'>must be of form '#.##'</div>
 			   </div>
 			</div><!--form-group-->
@@ -317,6 +317,7 @@ window.location.href="index.php";
 				    else{
 					echo '<input <a class="btn btn-primary" name="submit" type="submit" value="Submit Application" id="submitBtn"></a>';
 				    }
+				    <input <a="" class="btn btn-primary" name="cancel" value="Cancel" id="cancelBtn" onClick="history.go(-1);return true;"> 
 				?>
 			</form>
 	    		</div><!--box-->
