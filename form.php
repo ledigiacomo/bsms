@@ -176,33 +176,33 @@ function showForm($error)
 			<div class="form-group">
 			   <label for="inputFname" class="col-lg-2 control-label">First Name</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputFname" name="firstname" placeholder="First Name" value="<?php echo $_POST["firstname"];?>"/>
+				<input type="text" class="form-control input-sm" id="inputFname" name="firstname" placeholder="First Name" value="<?php if (!empty($_POST["firstname"])) echo $_POST["firstname"];?>"/>
 			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputLname" class="col-lg-2 control-label">Last Name</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputLname" name="lastname" placeholder="Last Name" value="<?php echo $_POST["lastname"];?>"/>
+				<input type="text" class="form-control input-sm" id="inputLname" name="lastname" placeholder="Last Name" value="<?php if (!empty($_POST["lastname"])) echo $_POST["lastname"];?>"/>
 			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputEmail" class="col-lg-2 control-label">Email</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputEmail" name="email" placeholder="Email" value="<?php echo $_POST["email"];?>"/>
+				<input type="text" class="form-control input-sm" id="inputEmail" name="email" placeholder="Email" value="<?php if (!empty($_POST["email"])) echo $_POST["email"];?>"/>
 				<div class='hint'>must be of form 'example@example.com'</div>
 			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputPid" class="col-lg-2 control-label">PID</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputPid" name="pid" placeholder="PID" value="<?php echo $_POST["pid"];?>"/>
+				<input type="text" class="form-control input-sm" id="inputPid" name="pid" placeholder="PID" value="<?php if (!empty($_POST["pid"])) echo $_POST["pid"];?>"/>
 				<div class='hint'>must be 9 digits long</div>
 			   </div>			
 			</div>
 			<div class="form-group">
 			   <label for="inputGpa" class="col-lg-2 control-label">GPA</label>
 			   <div class="col-lg-8">
-				<input type="text" class="form-control input-sm" id="inputGpa" name="gpa" placeholder="GPA" value="<?php echo $_POST["gpa"];?>"/>
+				<input type="text" class="form-control input-sm" id="inputGpa" name="gpa" placeholder="GPA" value="<?php if (!empty($_POST["gpa"])) echo $_POST["gpa"];?>"/>
 				<div class='hint'>must be of form '#.##'</div>
 			   </div>
 			</div><!--form-group-->
