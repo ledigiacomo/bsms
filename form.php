@@ -25,20 +25,20 @@ if(isset($_POST["submit"]))
 	} else if(empty($_FILES['file1']['name'])) {
 		showForm("Please upload your resume to the application.");
 		die();
-  } else if($_FILES['file1']['type'] != "application/pdf") {
-    showForm("Please upload the PDF version.");
+  	} else if($_FILES['file1']['type'] != "application/pdf") {
+    		showForm("Please upload the PDF version.");
 		die();
 	} else if(empty($_FILES['file2']['name'])) {
 		showForm("Please upload your Statement of Purpose to the application.");
 		die();
-  } else if($_FILES['file2']['type'] != "application/pdf") {
-    showForm("Please upload the PDF version.");
+  	} else if($_FILES['file2']['type'] != "application/pdf") {
+    		showForm("Please upload the PDF version.");
 		die();
 	} else if(empty($_FILES['file3']['name'])) {
 		showForm("Please upload your Transcript to the application.");
 		die();
-  } else if($_FILES['file3']['type'] != "application/pdf") {
-    showForm("Please upload the PDF version.");
+  	} else if($_FILES['file3']['type'] != "application/pdf") {
+    		showForm("Please upload the PDF version.");
 		die();
 	} else {
 
