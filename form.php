@@ -317,7 +317,7 @@ window.location.href="index.php";
 				    else{
 					echo '<input <a class="btn btn-primary" name="submit" type="submit" value="Submit Application" id="submitBtn"></a>';
 				    }
-				    <input <a="" class="btn btn-primary" name="cancel" value="Cancel" id="cancelBtn" onClick="history.go(-1);return true;"> 
+                                    echo '<input <a="" class="btn btn-primary" name="cancel" value="Cancel" id="cancelBtn" onClick="history.go(-1);return true;">'; 
 				?>
 			</form>
 	    		</div><!--box-->
