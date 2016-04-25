@@ -209,15 +209,31 @@ function showForm($error)
 			<div class="form-group">
 				<label for="inputTerm" class="col-lg-2 control-label">Anticipated Start Date</label>
 				<div class="col-lg-8">
-				<select class="form-control" name="term" id="inputTerm">
-					<option value="" selected>Please Select</option>
-					<option value="F15">Fall, 2015</option>
-					<option value="S16">Spring, 2016</option>
-					<option value="F16">Fall, 2016</option>
-					<option value="S17">Spring, 2017</option>
-					<option value="F17">Fall, 2017</option>
-					<option value="S18">Spring, 2018</option>
-					<option value="F18">Fall, 2018</option>
+				<select class="form-control"id="selectElementId"></select>
+					<script>
+						var min = new Date().getFullYear(),
+					    max = min + 2, iter = 0,
+					    select = document.getElementById('selectElementId');
+
+						for (var i = min; i<=max; iter++)
+						{
+						    var opt = document.createElement('option');
+						    if(iter % 2 == 0)
+						    {
+						    	opt.value = "Spring " + i;
+						    	opt.innerHTML = "Spring " + i;
+						    }
+						    else
+						    {
+						    	opt.value = "Fall " + i;
+						    	opt.innerHTML = "Fall " + i;
+						    	i++;
+						    }
+						    select.appendChild(opt);
+						}
+
+						select.value = new Date().getFullYear();
+					</script>
 				</select><!--form-control-->
 				</div><!--col-lg-8-->
 			</div><!--form-group-->
