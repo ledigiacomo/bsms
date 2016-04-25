@@ -209,11 +209,11 @@ function showForm($error)
 			<div class="form-group">
 				<label for="inputTerm" class="col-lg-2 control-label">Anticipated Start Date</label>
 				<div class="col-lg-8">
-				<select class="form-control"id="selectElementId"></select>
+				<select class="form-control" name="term" id="inputTerm"></select>
 					<script>
 						var min = new Date().getFullYear(),
 					    max = min + 2, iter = 0,
-					    select = document.getElementById('selectElementId');
+					    select = document.getElementById('inputTerm');
 
 						for (var i = min; i<=max; iter++)
 						{
